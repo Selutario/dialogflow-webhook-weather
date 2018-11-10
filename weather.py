@@ -56,9 +56,9 @@ def processRequest(req):
         introduction = "Hoy en " + city + " el tiempo será el siguiente:"
 
     if (temp_min == temp_max):
-        temperature = "La temperatura será de " + temp_min + " grados centígrados."
+        temperature = "La temperatura será de " + temp_min + " grados centígrados. "
     else:
-        temperature = "La temperatura estará entre "+temp_min+" y " + temp_max + " grados."
+        temperature = "La temperatura estará entre "+temp_min+" y " + temp_max + " grados. "
 
     hum_wind = "La humedad rondará el " + humidity + "% y la velocidad del viento " + wind_speed + " m/s"
 
