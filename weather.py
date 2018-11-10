@@ -51,14 +51,14 @@ def processRequest(req):
 
 
     if (city_raw == "Granada"):
-        introduction = "Me alegro que preguntes por mi ciudad natal. Hoy en el tiempo en la Alhambra será el siguiente: "
+        introduction = "Me alegro que preguntes por mi ciudad natal. Hoy el tiempo en la Alhambra será el siguiente: "
     else:
         introduction = "Hoy en " + city + " el tiempo será el siguiente:"
 
     if (temp_min == temp_max):
         temperature = "La temperatura será de " + temp_min + " grados centígrados."
     else:
-        temperature = "La temperatura estará entre "+temp_min+" y " + temp_max + " grados centígrados."
+        temperature = "La temperatura estará entre "+temp_min+" y " + temp_max + " grados."
 
     hum_wind = "La humedad rondará el " + humidity + "% y la velocidad del viento " + wind_speed + " m/s"
 
