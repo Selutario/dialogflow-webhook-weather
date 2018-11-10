@@ -46,7 +46,7 @@ def webhook():
     print("===========================")
     print(r)
     print("===========================")
-    return res
+    return r
 
 #processing the request from dialogflow
 def processRequest(req):
@@ -83,9 +83,7 @@ def processRequest(req):
         speech = "Me temo que no conozco la ciudad que indicas. Todo ha cambiado mucho desde que yo morí."
 
     return {
-        "speech": speech,
-        "displayText": speech,
-        "source": "dialogflow-weather-by-satheshrgs"
+        "fulfillmentText": speech
         }
 
     
