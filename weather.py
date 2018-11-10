@@ -33,7 +33,8 @@ def webhook():
 #processing the request from dialogflow
 def processRequest(req):
 
-    list_of_words = req.split()
+    req_string = str(req)
+    list_of_words = req_string.split()
     city_raw = list_of_words[list_of_words.index("{'geo-city-es':") + 1]
     city = city_raw.translate({ord(c): None for c in "'},"})
     city_country = city + ",es"
