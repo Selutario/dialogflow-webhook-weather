@@ -52,7 +52,7 @@ def processRequest(req):
         temp_min_celsius=str(celsius_result.get('temp_min'))
         temp_max_celsius=str(celsius_result.get('temp_max'))
 
-        speech = "Hoy en " + city + " el tiempo será el siguiente: \n" + "La temperatura estará entre "+temp_max_celsius+"ºC y "+temp_min_celsius+"ºC.\nLa humedad rondará el "+humidity+"% y la velocidad del viento "+wind_speed+" m/s"
+        speech = "Hoy en " + city + " el tiempo será el siguiente: \n" + "La temperatura estará entre "+temp_min_celsius+"ºC y "+temp_max_celsius+"ºC.\nLa humedad rondará el "+humidity+"% y la velocidad del viento "+wind_speed+" m/s"
 
         if (city == "Granada"):
             speech = "Me alegro que preguntes por mi ciudad natal. " + speech
