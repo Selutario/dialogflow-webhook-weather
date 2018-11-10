@@ -30,15 +30,7 @@ def webhook():
 def processRequest(req):
 
     city = req['queryResult']['parameters']['geo-city-es']
-    '''
-    req_string = str(req)
-    list_of_words = req_string.split()
-    city_raw = list_of_words[list_of_words.index("{'geo-city-es':") + 1]
-    city = city_raw.translate({ord(c): None for c in "'},"})
     city_country = city + ",es"
-    '''
-    city_country = city + ",es"
-
 
     if (city != ''):
         observation = owm.weather_at_place(city_country)
@@ -56,7 +48,7 @@ def processRequest(req):
         temp_min_celsius=str(celsius_result.get('temp_min'))
         temp_max_celsius=str(celsius_result.get('temp_max'))
 
-        speech = "Hoy en " + city + " el tiempo será el siguiente: \n" + "La temperatura estará entre "+temp_min_celsius+" y "+temp_max_celsius+" grados centígrados.\nLa humedad rondará el "+humidity+"% y la velocidad del viento "+wind_speed+" m/s"
+        speech = "Hoy en " + city + " el tiempo será el siguiente: " + "\n\nLa temperatura estará entre "+temp_min_celsius+" y "+temp_max_celsius+" grados centígrados. La humedad rondará el "+humidity+"% y la velocidad del viento "+wind_speed+" m/s"
 
         if (city == "Granada"):
             speech = "Me alegro que preguntes por mi ciudad natal. " + speech
