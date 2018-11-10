@@ -8,8 +8,12 @@ import os
 
 app = Flask(__name__)
 
+'''
 owmapikey=os.environ.get('OWMApiKey') #or provide your key here
 owm = pyowm.OWM(owmapikey)
+'''
+owm = pyowm.OWM("16e492312c447514ed5060e038bee468")
+
 
 #geting and sending response to dialogflow
 @app.route('/webhook', methods=['POST'])
@@ -48,7 +52,7 @@ def processRequest(req):
 
 
     if (city == "Granada"):
-        introduction = "Me alegro que preguntes por mi ciudad natal. Hoy en el tiempo en la Alhambra será el siguiente: \n\n""
+        introduction = "Me alegro que preguntes por mi ciudad natal. Hoy en el tiempo en la Alhambra será el siguiente: \n\n"
     elif ("" == req['queryResult']['parameters']['geo-city-es']):
         introduction = "Me temo que no conozco la ciudad que indicas. Todo ha cambiado mucho desde que morí, pero te diré el tiempo en Granada."
     else:
