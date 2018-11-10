@@ -30,31 +30,38 @@ def webhook():
 def processRequest(req):
 
     city = req['queryResult']['parameters']['geo-city-es']
+    if (city == ''):
+        city = "Granada"
+        
     city_country = city + ",es"
+    observation = owm.weather_at_place(city_country)
+    w = observation.get_weather()
+    
+    wind_res=w.get_wind()
+    wind_speed=str(wind_res.get('speed'))
+    
+    humidity=str(w.get_humidity())
+    
+    celsius_result=w.get_temperature('celsius')
+    temp_min=str(celsius_result.get('temp_min'))
+    temp_max=str(celsius_result.get('temp_max'))
 
-    if (city != ''):
-        observation = owm.weather_at_place(city_country)
-        w = observation.get_weather()
-        latlon_res = observation.get_location()
-        lat=str(latlon_res.get_lat())
-        lon=str(latlon_res.get_lon())
-        
-        wind_res=w.get_wind()
-        wind_speed=str(wind_res.get('speed'))
-        
-        humidity=str(w.get_humidity())
-        
-        celsius_result=w.get_temperature('celsius')
-        temp_min_celsius=str(celsius_result.get('temp_min'))
-        temp_max_celsius=str(celsius_result.get('temp_max'))
 
-        speech = "Hoy en " + city + " el tiempo será el siguiente: " + "\n\nLa temperatura estará entre "+temp_min_celsius+" y "+temp_max_celsius+" grados centígrados. La humedad rondará el "+humidity+"% y la velocidad del viento "+wind_speed+" m/s"
-
-        if (city == "Granada"):
-            speech = "Me alegro que preguntes por mi ciudad natal. " + speech
-
+    if (city == "Granada"):
+        introduction = "Me alegro que preguntes por mi ciudad natal. Hoy en el tiempo en la Alhambra será el siguiente: \n\n""
+    elif ("" == req['queryResult']['parameters']['geo-city-es']):
+        introduction = "Me temo que no conozco la ciudad que indicas. Todo ha cambiado mucho desde que morí, pero te diré el tiempo en Granada."
     else:
-        speech = "Me temo que no conozco la ciudad que indicas. Todo ha cambiado mucho desde que morí."
+        introduction = "Hoy en " + city + " el tiempo será el siguiente:"
+
+    if (temp_min == temp_max):
+        temperature = "La temperatura será de " + temp_min + " grados centígrados."
+    else:
+        temperature = "La temperatura estará entre "+temp_min+" y " + temp_max + " grados centígrados."
+
+    hum_wind = "La humedad rondará el " + humidity + "% y la velocidad del viento " + wind_speed + " m/s"
+            
+    speech = introduction + "\n\n" + temperature + hum_wind
 
     return {
         "fulfillmentText": speech
