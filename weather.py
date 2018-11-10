@@ -8,11 +8,9 @@ import os
 
 app = Flask(__name__)
 
-'''
+
 owmapikey=os.environ.get('OWMApiKey') #or provide your key here
 owm = pyowm.OWM(owmapikey)
-'''
-owm = pyowm.OWM("16e492312c447514ed5060e038bee468")
 
 
 #geting and sending response to dialogflow
@@ -33,7 +31,7 @@ def webhook():
 #processing the request from dialogflow
 def processRequest(req):
 
-    city = req['queryResult']['parameters']['geo-city-es']
+    city_raw, city = req['queryResult']['parameters']['geo-city-es']
     if (city == ''):
         city = "Granada"
         
@@ -51,10 +49,8 @@ def processRequest(req):
     temp_max=str(celsius_result.get('temp_max'))
 
 
-    if (city == "Granada"):
+    if (city_raw == "Granada"):
         introduction = "Me alegro que preguntes por mi ciudad natal. Hoy en el tiempo en la Alhambra será el siguiente: \n\n"
-    elif ("" == req['queryResult']['parameters']['geo-city-es']):
-        introduction = "Me temo que no conozco la ciudad que indicas. Todo ha cambiado mucho desde que morí, pero te diré el tiempo en Granada."
     else:
         introduction = "Hoy en " + city + " el tiempo será el siguiente:"
 
@@ -64,8 +60,12 @@ def processRequest(req):
         temperature = "La temperatura estará entre "+temp_min+" y " + temp_max + " grados centígrados."
 
     hum_wind = "La humedad rondará el " + humidity + "% y la velocidad del viento " + wind_speed + " m/s"
-            
-    speech = introduction + "\n\n" + temperature + hum_wind
+
+
+    if (city_raw != ""):        
+        speech = introduction + "\n\n" + temperature + hum_wind
+    else:
+        speech = "Me temo que no conozco la ciudad que indicas. Todo ha cambiado mucho desde que morí."
 
     return {
         "fulfillmentText": speech
