@@ -46,7 +46,7 @@ def webhook():
     print("===========================")
     print(r)
     print("===========================")
-    return r
+    return res
 
 #processing the request from dialogflow
 def processRequest(req):
