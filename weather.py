@@ -25,7 +25,9 @@ def webhook():
 
 #processing the request from dialogflow
 def processRequest(req):
-    
+    print("------------ REQ ------------")
+    print (req)
+    print("----------- END REQ ----------")
     result = req.get("result")
     print("-------------------------------")
     print(result)
