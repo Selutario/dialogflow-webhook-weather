@@ -31,7 +31,8 @@ def webhook():
 #processing the request from dialogflow
 def processRequest(req):
 
-    city_raw, city = req['queryResult']['parameters']['geo-city-es']
+    city_raw = req['queryResult']['parameters']['geo-city-es']
+    city = city_raw
     if (city == ''):
         city = "Granada"
         
