@@ -18,8 +18,8 @@ owm = pyowm.OWM(owmapikey)
 
 
 #geting and sending response to dialogflow
-@app.route('/webhook')
-#@app.route('/webhook', methods=['POST'])
+#@app.route('/webhook')
+@app.route('/webhook', methods=['POST'])
 def webhook():
     req = request.get_json(silent=True, force=True)
     #req = "{'responseId': '39c5bf4f-eabd-4f1b-be0d-9105fdbec3e7', 'queryResult': {'queryText': 'dime el tiempo en Madrid', 'parameters': {'geo-city-es': ''}, 'allRequiredParamsPresent': True, 'fulfillmentText': 'Tiempo no disponible.', 'fulfillmentMessages': [{'text': {'text': ['Tiempo no disponible.']}}], 'intent': {'name': 'projects/boabdil-545a0/agent/intents/aa02d570-b786-4c63-8ef5-a562e91ab49d', 'displayName': 'Cortesía - Tiempo'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'es'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/boabdil-545a0/agent/sessions/05bcd830-a89f-0141-6d64-6cf6fb1c8e78'}"
@@ -46,7 +46,7 @@ def webhook():
     print("===========================")
     print(r)
     print("===========================")
-    return res
+    return r
 
 #processing the request from dialogflow
 def processRequest(req):
