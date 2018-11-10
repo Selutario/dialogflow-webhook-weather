@@ -51,7 +51,7 @@ def processRequest(req):
 
 
     if (city_raw == "Granada"):
-        introduction = "Me alegro que preguntes por mi ciudad natal. Hoy en el tiempo en la Alhambra será el siguiente: \n\n"
+        introduction = "Me alegro que preguntes por mi ciudad natal. Hoy en el tiempo en la Alhambra será el siguiente: "
     else:
         introduction = "Hoy en " + city + " el tiempo será el siguiente:"
 
